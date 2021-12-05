@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         return response([
-            'posts' => Posts::orderBy('created_at', 'desc')->with('user:id,name,image')->withCount('comments', 'likes')->get()
+            'posts' => Post::orderBy('created_at', 'desc')->with('user:id,name,image')->withCount('comments', 'likes')->get()
         ], 200);
     }
 
@@ -94,7 +95,7 @@ class PostController extends Controller
             ], 403);
         }
 
-        if($post->user_id != auth()->user()-id) 
+        if($post->user_id != auth()->user()->id) 
         {
             return response([
                 'message' => 'Permission denied..'

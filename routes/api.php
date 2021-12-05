@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // resource routes
     Route::resources([
         'posts' => PostController::class,
-        'comments' => PostController::class,
+        'comments' => CommentController::class,
     ]);
 
     // like or unlike
