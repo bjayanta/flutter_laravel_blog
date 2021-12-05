@@ -16,3 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// create storage-link
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Storage Link generated';
+});
+
+// artisan route
+Route::prefix('artisan')->group(function () {
+    // create storage-link
+    Route::get('storage-link', function () {
+        Artisan::call('storage:link');
+        return 'Storage Link generated';
+    });
+    
+});
+

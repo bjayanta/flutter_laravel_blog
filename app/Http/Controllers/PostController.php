@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         return response([
-            'posts' => Post::orderBy('created_at', 'desc')->with('user:id,name,image')->withCount('comments', 'likes')->get()
+            'posts' => Post::orderBy('created_at', 'desc')->with('user:id,name,image', 'likes')->withCount('comments', 'likes')->get()
         ], 200);
     }
 
@@ -41,6 +41,8 @@ class PostController extends Controller
         $attributies = $request->validate([
             'body' => 'required|string'
         ]);
+
+        $image = $this->saveImage($request->image, 'posts');
 
         $post = Post::create([
             'body' => $attributies['body'],
